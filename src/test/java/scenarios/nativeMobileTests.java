@@ -16,18 +16,19 @@ public class nativeMobileTests extends BaseTest {
         String email = getTestData("email");
         String expectedWebPageTitle = getTestData("expectedWebPageTitle");
 
-        getPo().getWelement("registerBtn").click();
-        getPo().getWelement("registrationEmail").sendKeys(email);
-        getPo().getWelement("registrationUsername").sendKeys(username);
-        getPo().getWelement("registrationPassword").sendKeys(password);
-        getPo().getWelement("registrationConfirmPassword").sendKeys(password);
-        getPo().getWelement("registerNewAccountBtn").click();
+        getPo().getWelement("LoginPage","registerBtn").click();
 
-        getPo().getWelement("loginEmail").sendKeys(email);
-        getPo().getWelement("loginPwd").sendKeys(password);
-        getPo().getWelement("signInBtn").click();
+        getPo().getWelement("RegistrationPage","registrationEmail").sendKeys(email);
+        getPo().getWelement("RegistrationPage","registrationUsername").sendKeys(username);
+        getPo().getWelement("RegistrationPage","registrationPassword").sendKeys(password);
+        getPo().getWelement("RegistrationPage","registrationConfirmPassword").sendKeys(password);
+        getPo().getWelement("RegistrationPage","registerNewAccountBtn").click();
 
-        assert getPo().getWelement("frameTitle").getText()
+        getPo().getWelement("LoginPage","loginEmail").sendKeys(email);
+        getPo().getWelement("LoginPage","loginPwd").sendKeys(password);
+        getPo().getWelement("LoginPage","signInBtn").click();
+
+        assert getPo().getWelement("BudgetPage","frameTitle").getText()
                       .equals(expectedWebPageTitle) : "Actual App page differ from expected";
 
         System.out.println("Simplest Android native test is done");

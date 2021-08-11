@@ -1,8 +1,8 @@
 package scenarios;
 
-import org.openqa.selenium.JavascriptExecutor;
+import static util.TestDataReader.getTestData;
+
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 import setup.BaseTest;
 
@@ -14,17 +14,16 @@ public class webMobileTests extends BaseTest {
 
         System.out.println("Simple Google web page test is starting");
 
-        getDriver().get("https://www.google.com/");
+        getDriver().get(getTestData("url"));
 
-        // Make sure that page has been loaded completely
-        new WebDriverWait(getDriver(), 10).until(
-            wd -> ((JavascriptExecutor) wd).executeScript("return document.readyState").equals("complete")
-        );
+        waitForPageToLoadCompletely();
 
-        getPo().getWelement("searchField").sendKeys("EPAM");
-        getPo().getWelement("searchField").sendKeys(Keys.ENTER);
+        getPo().getWelement("GoogleSearchWebPage","searchField").sendKeys(getTestData("searchPhrase"));
+        getPo().getWelement("GoogleSearchWebPage","searchField").sendKeys(Keys.ENTER);
 
-        assert getPo().getWelement("searchResults").isDisplayed() : "No results displayed";
+        waitForPageToLoadCompletely();
+
+        assert getPo().getWelement("GoogleResultsWebPage","searchResults").isDisplayed() : "No results displayed";
 
         // Log that test finished
         System.out.println("Simple Google web page test is completed");
