@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.mtat</groupId>
-    <artifactId>mobileTaTrainingV2</artifactId>
+    <artifactId>VladimirRyzhenkovMobile</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
@@ -20,6 +20,9 @@
             <version>7.1.0</version>
         </dependency>
     </dependencies>
+    <properties>
+        <maven-surefire-plugin.environment>qa</maven-surefire-plugin.environment>
+    </properties>
 
     <build>
         <plugins>
@@ -33,6 +36,7 @@
                     </suiteXmlFiles>
                     <systemPropertyVariables>
                         <ts.appium>http://localhost:4723/wd/hub</ts.appium>
+                        <environment>${maven-surefire-plugin.environment}</environment>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
@@ -55,6 +59,7 @@
             </activation>
             <properties>
                 <suite.file>src/test/resources/nativeTNG.xml</suite.file>
+                <maven-surefire-plugin.environment>qaNative</maven-surefire-plugin.environment>
             </properties>
         </profile>
 
@@ -65,6 +70,7 @@
             </activation>
             <properties>
                 <suite.file>./src/test/resources/webTNG.xml</suite.file>
+                <maven-surefire-plugin.environment>qaWeb</maven-surefire-plugin.environment>
             </properties>
         </profile>
     </profiles>
