@@ -62,7 +62,6 @@
                 <maven-surefire-plugin.environment>qaNative</maven-surefire-plugin.environment>
             </properties>
         </profile>
-
         <profile>
             <id>web</id>
             <activation>
@@ -73,6 +72,47 @@
                 <maven-surefire-plugin.environment>qaWeb</maven-surefire-plugin.environment>
             </properties>
         </profile>
+        <profile>
+            <id>webAndroidCloud</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/webAndroidCloud.xml</suite.file>
+                <maven-surefire-plugin.environment>qaWeb</maven-surefire-plugin.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>webIosCloud</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/webIosCloud.xml</suite.file>
+                <maven-surefire-plugin.environment>qaWeb</maven-surefire-plugin.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>nativeAndroidCloud</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/nativeAndroidCloud.xml</suite.file>
+                <maven-surefire-plugin.environment>qaNative</maven-surefire-plugin.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>nativeIosCloud</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>./src/test/resources/nativeIosCloud.xml</suite.file>
+                <maven-surefire-plugin.environment>qaNative</maven-surefire-plugin.environment>
+            </properties>
+        </profile>
+
     </profiles>
 
 

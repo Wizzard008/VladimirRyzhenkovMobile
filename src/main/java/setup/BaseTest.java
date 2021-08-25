@@ -1,6 +1,12 @@
 package setup;
 
+import static java.lang.String.format;
+import static util.TokenReader.getSecretToken;
+
 import io.appium.java_client.AppiumDriver;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,13 +32,16 @@ public class BaseTest implements IDriver {
         return po;
     }
 
-    @Parameters({"platformName", "appType", "deviceName", "browserName", "app"})
+    @Parameters({"platformName", "appType", "deviceName", "browserName", "app", "appiumHub", "projectName",
+                    "deviceUdid","appPackage","appActivity","bundleId"})
     @BeforeSuite(alwaysRun = true)
-    public void setUp(String platformName, String appType, String deviceName, @Optional("") String browserName,
-                      @Optional("") String app) throws Exception {
+    public void setUp(String platformName, String appType, @Optional("") String deviceName
+        , @Optional("") String browserName, @Optional("") String app
+        , String appiumHub, @Optional("") String projectName, @Optional("") String deviceUdid
+        , @Optional("") String appPackage, @Optional("") String appActivity, @Optional("") String bundleId) throws Exception {
 
         System.out.println("Before: app type - " + appType);
-        setAppiumDriver(platformName, deviceName, browserName, app);
+        setAppiumDriver(platformName, deviceName, browserName, app, appiumHub, projectName, deviceUdid, appPackage, appActivity, bundleId);
         setPageObject(appType, appiumDriver);
     }
 
@@ -42,7 +51,11 @@ public class BaseTest implements IDriver {
         appiumDriver.closeApp();
     }
 
-    private void setAppiumDriver(String platformName, String deviceName, String browserName, String app) {
+    private void setAppiumDriver(String platformName, String deviceName, String browserName, String app
+        , String appiumHub, String projectName, String deviceUdid, String appPackage, String appActivity,
+                                 String bundleId)
+        throws UnsupportedEncodingException, MalformedURLException {
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         //mandatory Android capabilities
         capabilities.setCapability("platformName", platformName);
@@ -50,15 +63,25 @@ public class BaseTest implements IDriver {
         if (app.endsWith(".apk")) {
             capabilities.setCapability("app", (new File(app)).getAbsolutePath());
         }
-
+        capabilities.setCapability("UDID", deviceUdid);
         capabilities.setCapability("browserName", browserName);
         capabilities.setCapability("chromedriverDisableBuildCheck", "true");
+        capabilities.setCapability("appPackage", appPackage);
+        capabilities.setCapability("appActivity", appActivity);
+        capabilities.setCapability("bundleId", bundleId);
 
-        try {
-            appiumDriver = new AppiumDriver(new URL(System.getProperty("ts.appium")), capabilities);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+        String safetyIdentifier="";
+        String key="";
+        if(!projectName.equalsIgnoreCase("")){
+            safetyIdentifier = "s";
+            key=getSecretToken();
         }
+
+
+        String utfKey = URLEncoder.encode(key, StandardCharsets.UTF_8.name());
+        appiumDriver = new AppiumDriver(
+            new URL(format("http%s://%s:%s@%s/wd/hub", safetyIdentifier, projectName, utfKey, appiumHub)),
+            capabilities);
 
         // Timeouts tuning
         appiumDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

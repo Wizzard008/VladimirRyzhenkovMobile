@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Web mobile testing Suite">
+  <parameter name="appType" value="web"/>
+  <parameter name="platformName" value="Android"/>
+  <parameter name="browserName" value="Chrome"/>
+  <parameter name="deviceUdid" value="0A071FDD4005QL"/>
+  <parameter name="projectName" value="EPM-TSTF"/>
+  <parameter name="appiumHub" value="mobilecloud.epam.com"/>
+  <test name="Web Android Cloud tests">
+    <groups>
+      <run>
+        <include name="web"/>
+      </run>
+    </groups>
+    <packages>
+      <package name="scenarios"/>
+    </packages>
+  </test>
+</suite>
