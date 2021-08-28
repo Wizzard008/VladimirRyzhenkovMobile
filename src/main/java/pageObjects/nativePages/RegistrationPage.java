@@ -29,6 +29,10 @@ public class RegistrationPage {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@label='Register new account']")
     WebElement registerNewAccountBtn;
 
+    @AndroidFindBy(xpath = "//*[@text='I read agreaments and agree wit it']")
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeStaticText[@value='I read agreaments and agree wit it']")
+    WebElement agreementBtn;
+
     public RegistrationPage(AppiumDriver driver) {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
