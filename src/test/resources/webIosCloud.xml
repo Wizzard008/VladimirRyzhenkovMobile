@@ -3,7 +3,7 @@
     <parameter name="appType" value="web"/>
     <parameter name="platformName" value="iOS"/>
     <parameter name="browserName" value="Safari"/>
-    <parameter name="deviceUdid" value="00008101-000611D60C04001E"/>
+    <parameter name="deviceUdid" value="00008101-0000141E3E78001E"/>
     <parameter name="projectName" value="EPM-TSTF"/>
     <parameter name="appiumHub" value="mobilecloud.epam.com"/>
     <test name="Web iOS Cloud tests">

@@ -35,7 +35,6 @@
                         <suiteXmlFile>${suite.file}</suiteXmlFile>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
-                        <ts.appium>http://localhost:4723/wd/hub</ts.appium>
                         <environment>${maven-surefire-plugin.environment}</environment>
                     </systemPropertyVariables>
                 </configuration>

@@ -17,7 +17,7 @@ Web Android Cloud test:
 mvn -PwebAndroidCloud clean test
 
 Native iOS Cloud test:
-mvn -PnativeAndroidCloud clean test
+mvn -PnativeIosCloud clean test
 
 Web iOS Cloud test:
-mvn -PwebAndroidCloud clean test
+mvn -PwebIosCloud clean test
