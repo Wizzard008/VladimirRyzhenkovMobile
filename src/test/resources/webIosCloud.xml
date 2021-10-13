@@ -1,11 +1,12 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Web mobile testing Suite">
     <parameter name="appType" value="web"/>
-    <parameter name="deviceName" value="emulator-5554"/>
-    <parameter name="platformName" value="Android"/>
-    <parameter name="browserName" value="Chrome"/>
-    <parameter name="appiumHub" value="localhost:4723"/>
-    <test name="Web tests">
+    <parameter name="platformName" value="iOS"/>
+    <parameter name="browserName" value="Safari"/>
+    <parameter name="deviceUdid" value="00008101-0000141E3E78001E"/>
+    <parameter name="projectName" value="EPM-TSTF"/>
+    <parameter name="appiumHub" value="mobilecloud.epam.com"/>
+    <test name="Web iOS Cloud tests">
         <groups>
             <run>
                 <include name="web"/>

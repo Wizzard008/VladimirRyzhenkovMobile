@@ -22,6 +22,7 @@ public class nativeMobileTests extends BaseTest {
         getPo().getWelement("RegistrationPage","registrationUsername").sendKeys(username);
         getPo().getWelement("RegistrationPage","registrationPassword").sendKeys(password);
         getPo().getWelement("RegistrationPage","registrationConfirmPassword").sendKeys(password);
+        getPo().getWelement("RegistrationPage","agreementBtn").click();
         getPo().getWelement("RegistrationPage","registerNewAccountBtn").click();
 
         getPo().getWelement("LoginPage","loginEmail").sendKeys(email);
@@ -29,7 +30,7 @@ public class nativeMobileTests extends BaseTest {
         getPo().getWelement("LoginPage","signInBtn").click();
 
         assert getPo().getWelement("BudgetPage","frameTitle").getText()
-                      .equals(expectedWebPageTitle) : "Actual App page differ from expected";
+                      .contains(expectedWebPageTitle) : "Actual App page differ from expected";
 
         System.out.println("Simplest Android native test is done");
     }

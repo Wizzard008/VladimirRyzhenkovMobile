@@ -3,4 +3,5 @@ sandbox
 sandbox*.*
 *.iml
 .idea
+token.properties
 
